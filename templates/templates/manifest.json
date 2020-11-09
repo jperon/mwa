@@ -1,0 +1,16 @@
+{
+  "name": "<<<name>>>",
+  "short_name": "<<<short_name>>>",
+  "icons": [
+    {
+      "src": "icon.png",
+      "purpose": "maskable any",
+      "sizes": "512x512"
+    }
+  ],
+  "lang": "<<<lang>>>",
+  "start_url": "<<<start_url>>>",
+  "display": "standalone",
+  "background_color": "<<<background_color>>>",
+  "theme_color": "<<<theme_color>>>"
+}
