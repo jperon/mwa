@@ -18,6 +18,14 @@ OPTIONS = {
 
 err = (...) -> stderr\write("#{concat({...}, " ")}\n")
 
+find = (fn) => wrap ->
+  for f in dir @
+    if f ~= "." and f ~= ".."
+      _f = @.."/"..f
+      yield _f if not fn or fn _f
+      if attributes(_f, "mode") == "directory"
+        yield n for n in find _f, fn
+
 opairs = (t, fn) ->
   _t = [k for k in pairs t]
   sort _t, fn
@@ -52,7 +60,7 @@ do
 
 
 do
-  execute "bash ./moon_compile.sh"
+  execute"moonc -p #{f} | luamin -c > #{f\gsub '%.moon$', '.lua'}" for f in find "src", => @\match"%.moon$"
   ct = require("#{SRC}/index") OPTIONS
   sortie = assert open "#{DIST}/index.html", "w"
   sortie\write ct
@@ -80,4 +88,4 @@ fill_options = (input_dir, output_dir) ->
         output\write ct
         output\close!
 
-fill_options TEMPLATES, STATIC
+fill_options TEMPLATES, DIST

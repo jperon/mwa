@@ -34,7 +34,7 @@ load_lua = => "package.loaded[\"#{@}\"] = (function() #{read(@..'.lua')\gsub('[%
         div id:"corps", style: "display:none;", ->
           div id: "contenu", ->
             button id: "btn", "Cliquez ici."
-          p id: "note_version", -> "Version #{version}"
+          p id: "note_version", "Version #{version}"
         script type:"application/lua", ->
           text load_lua "html"
           text load_lua "luajs"
